@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -7,6 +8,7 @@ from .serializers import PostSerializerList, PostSerializerDetail, AddPostSerial
 
 class PostsListView(APIView):
     """Ваши кучи(pepodance)"""
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         current_user = request.user.id
         posts = Post.objects.filter(owner=current_user)
